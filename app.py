@@ -48,7 +48,7 @@ def project():
 
 @app.route("/coding_portfolio")
 def coding_portfolio():
-    username = "craqvfx"
+    username = "christian-boland-ross"
     repos = get_github_repos(username)
     language_colors = {
         'Python': '#3572A5',
