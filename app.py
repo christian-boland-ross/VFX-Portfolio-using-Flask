@@ -13,7 +13,37 @@ db = SQL("sqlite:///projects.db")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    username = "christian-boland-ross"
+    repos = get_github_repos(username)
+    language_colors = {
+        'Python': '#3572A5',
+        'JavaScript': '#f1e05a',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'Java': '#b07219',
+        'C++': '#f34b7d',
+        'C': '#555555',
+    }
+
+    if repos is None:
+        return render_template("index.html", repos= None, username=username, language_colors=language_colors)
+
+    # Process repo data for template
+    repo_data = []
+    if repos:
+        for repo in repos:
+            print(f"Adding {repo['name']} to list")
+            repo_data.append({
+            'name': repo['name'],
+            'description': repo['description'] or 'No description available',
+            'url': repo['html_url'],
+            'updated_at': repo['updated_at'][:10],
+            'language': repo['language'],
+        })
+
+    print("Final data being sent to template:", repo_data)  # Debug line
+    
+    return render_template("index.html", repos=repo_data, username=username, language_colors=language_colors)
 
 @app.route("/contact")
 def contact():

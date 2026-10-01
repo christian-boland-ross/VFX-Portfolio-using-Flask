@@ -192,7 +192,50 @@ html {
     }
   }
 
+.scroll-arrow {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 30px;
+    height: 45px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
+    text-decoration: none;
+    z-index: 10;
+}
 
+.scroll-arrow span {
+    width: 16px;
+    height: 16px;
+    
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    
+    transform: rotate(45deg);
+    
+    animation: arrow-float 1.8s ease-in-out infinite;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@keyframes arrow-float {
+    0%, 100% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateY(10px) rotate(45deg);
+        opacity: 1;
+    }
+}
 
   /*VIDEO STUFF:*/
 
